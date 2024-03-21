@@ -17,7 +17,7 @@ save_model = True
 using_saved_model = False
 
 # mnist or patch
-mode = 'patch'
+mode = 'mnist'
 
 
 def plot_digits(X, y):
