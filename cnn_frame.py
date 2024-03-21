@@ -14,7 +14,7 @@ import tensorflow as tf
 # whether you want to save the model after training
 save_model = True
 # wether you want to used the last saved model
-using_saved_model = False
+using_saved_model = True
 
 # mnist or patch
 mode = 'mnist'
@@ -84,7 +84,7 @@ y_tsp = np.array([int(d[1]) for d in data])
 
 if mode == 'mnist':
     print("setting up mnist training. Train: MNIST. Test: TSP")
-    iters = 15
+    iters = 5
     batch_size = 200
 
     dim_row = 28
@@ -133,12 +133,12 @@ if using_saved_model:
 else:
     # setup NN for model
     model = models.Sequential()
-    model.add(layers.Conv2D(64, (3, 3), activation='relu', input_shape=(dim_row, dim_col, 1)))
+    model.add(layers.Conv2D(64, (2, 2), activation='relu', input_shape=(dim_row, dim_col, 1)))
     model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+    model.add(layers.Conv2D(64, (2, 2), activation='relu'))
     model.add(layers.MaxPooling2D((2, 2)))
-    model.add(layers.Conv2D(64, (3, 3), activation='relu'))
     model.add(layers.Flatten())
+    model.add(layers.Dropout(rate=0.5))
     model.add(layers.Dense(64, activation='relu'))
     model.add(layers.Dense(10))
 
